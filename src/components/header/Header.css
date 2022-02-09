@@ -1,8 +1,9 @@
 .header-wrapper{
-    max-width: 1300px;
-    margin: 2rem auto 0.5rem auto;
+    max-width: 900px;
+    margin: 4rem auto 1rem auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 1rem;
 }
 

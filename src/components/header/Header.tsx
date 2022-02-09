@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LocationContext } from "../../context/LocationContext";
 import { Add } from "@material-ui/icons";
 import Modal from "../modal/Modal";
 
 import "./Header.css";
 
 const Header: React.FC = () => {
+  const { state } = useContext(LocationContext)
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+console.log(state);
+
+
   return (
-    <>
-      {show && <div onClick={handleClose} className="back-drop"></div>}
+    <>      
       <div className="header-container">
         <div className="header-wrapper">
           <h1>Location list</h1>

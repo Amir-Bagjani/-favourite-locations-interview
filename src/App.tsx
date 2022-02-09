@@ -1,10 +1,12 @@
 import './App.css';
 import Header from './components/header/Header';
+import LocationList from './components/locationList/LocationList';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
+      <LocationList />
     </div>
   );
 }

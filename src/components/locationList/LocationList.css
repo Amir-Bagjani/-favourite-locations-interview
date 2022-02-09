@@ -1,0 +1,35 @@
+.locationlist-wrapper {
+  max-width: 900px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+.locationlist-table {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  width: 100%;
+}
+.locationlist-table thead {
+  background-color: lightgray;
+  text-align: left;
+}
+.locationlist-table th,
+.locationlist-table td {
+  height: 4rem;
+  padding-left: 0.5rem;
+  border-right: 1px solid gray;
+}
+.locationlist-table tr {
+  border-bottom: 1px solid gray;
+}
+.locationlist-table td:last-child,
+.locationlist-table th:last-child {
+  border-bottom: none;
+  border-right: none;
+}
+
+.locationlist-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
