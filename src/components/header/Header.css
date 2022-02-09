@@ -1,0 +1,8 @@
+.header-wrapper{
+    max-width: 1300px;
+    margin: 2rem auto 0.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
