@@ -1,10 +1,20 @@
 {
-    "locations": [
-      {
-        "title": "Twitter",
-        "type": "@mhosseintaher",
-        "coordinate": 544545,
-        "id": "1"
-      }
-    ]
-  }
+  "locations": [
+    {
+      "id": 3,
+      "title": "Parsian Hotel",
+      "type": "Hotel",
+      "description": "LoreM good bed and nice crew, cheap bear",
+      "latitude": 31.3183,
+      "longitude": 48.6706
+    },
+    {
+      "id": 4,
+      "title": "Farshchian Hospital",
+      "type": "Hospital",
+      "description": "Lorem organcy hart attacks, illness sadsad hfgh reyugvf gfk tye ",
+      "latitude": 32.7767,
+      "longitude": 96.797
+    }
+  ]
+}

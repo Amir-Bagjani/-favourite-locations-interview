@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { Add } from "@material-ui/icons";
 import Modal from "../modal/Modal";
@@ -10,9 +10,35 @@ const Header: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const userInformation: any = {
+    "user" : {
+      "first_name" : "Amir",
+      "last_name" : "Bagjani",
+      "address" : {
+        "street" : {
+          "name" : "test name",
+          "unit" : {"number" : 15}
+        }
+      }
+    }
+  }
+  
+  
+  const [user, setUser] = useState<any>(userInformation);
 
-console.log(state);
-
+  // useEffect(() => {
+  //   setUser(JSON.parse(user))
+  // }, [])
+  // useEffect(() => {
+  //   setUser(JSON.parse({...user, address: {street: {...user.address.street, unit: { number: 16}}}}))
+    
+    
+  // }, [])
+  // useEffect(() => {
+  //   // setUser(JSON.parse({...user, address: {street: {...user.address.street, unit: { number: 16}}}}))
+    
+  //   console.log(user);
+  // }, [user])
 
   return (
     <>      

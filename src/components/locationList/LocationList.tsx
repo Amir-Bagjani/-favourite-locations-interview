@@ -5,18 +5,13 @@ import TableData from './TableData';
 //style
 import "./LocationList.css"
 //type
-export type LocationData = {
-  id: number | string;
-  title: string;
-  type: string;
-  description: string;
-  coordinate: number;
-};
+import { LocationData } from '../../context/LocationContext';
 
 
 
 const LocationList: React.FC = () => {
     const [showModal, setShowModal] = useState<boolean>(false)
+    const [location,setLocation] = useState({} as LocationData)
     const handleClose = () => setShowModal(false)
     
   return (
@@ -34,11 +29,11 @@ const LocationList: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <TableData setShowModal={setShowModal} />
+                        <TableData setShowModal={setShowModal} setLocation={setLocation} />
                     </tbody>
                 </table>
 
-                <Modal show={showModal} close={handleClose}/>
+                <Modal show={showModal} close={handleClose} location={location}/>
             </div>
         </div>
     </>

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import axios from "axios";
 
 const ERROR_MSG = `لطفا جیسون سرور را به صورت گلوبال بر سیستم نصب کنید سپس در ترمینال دایرکتوری پروژه دستور زیر ر ا وارد کنید
 json-server --watch data/db.json --port 3030`;
@@ -8,7 +9,8 @@ export type LocationData = {
   title: string;
   type: string;
   description: string;
-  coordinate: number | string;
+  latitude: number;
+  longitude: number;
 };
 type LocationContextProviderProps = {
   children: React.ReactNode;
@@ -67,32 +69,25 @@ export const LocationContextProvider: React.FC<LocationContextProviderProps> = (
   const [state, dispatch] = useReducer(locationReducer, initialState);
 
   useEffect(() => {
-    const controller = new AbortController();
 
     dispatch({ type: "IS_PENDING" });
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:3030/locations`, {
-          signal: controller.signal,
-        });
-        const data = await res.json();
-        dispatch({ type: "FIRST_TIME", payload: [...data] });
-      } catch (error: any) {
-        if (error.name === "AbortError") {
-          dispatch({ type: "ERROR", payload: "the fetch was aborted" });
-          alert("the fetch was aborted");
+          const res = await axios.get(`http://localhost:3030/locations`, {cancelToken: axios.CancelToken.source().token});
+          dispatch({ type: "FIRST_TIME", payload: [...res.data] });
+      } catch (err) {
+        if (axios.isCancel(err)) {
+            console.log(`fetch aborted`);
         } else {
-          dispatch({ type: "ERROR", payload: ERROR_MSG });
-          alert(ERROR_MSG);
-        }
+            dispatch({ type: "ERROR", payload: ERROR_MSG });
+            alert(ERROR_MSG);
+          }
       }
     };
 
     fetchData();
 
-    return () => {
-      controller.abort();
-    };
+    return () => axios.CancelToken.source().cancel();
   }, []);
 
   return (
