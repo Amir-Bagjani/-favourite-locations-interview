@@ -50,17 +50,19 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
         e.preventDefault()
         setError(``)
         //dead simple validation
-        if(!!title && !!description && !!type && selected){
+        if(!!title && !!description && !!type && latitude && longitude){
             if(location){//edit mode
                 const data: LocationData = {id: location.id, title, type, description, latitude, longitude}
                 await axios.put(`http://localhost:3030/locations/${location.id}`, data)
                 dispatch({type: "EDIT_LOCATION", payload: data})
                 handleClose()
             }else{//add mode
-                const data: LocationData = {id: Math.random(), title, type, description, latitude, longitude}
-                await axios.post(`http://localhost:3030/locations`, data)
-                dispatch({type: "ADD_LOCATION", payload: data})
-                handleClose()
+                if(selected){
+                    const data: LocationData = {id: Math.random(), title, type, description, latitude, longitude}
+                    await axios.post(`http://localhost:3030/locations`, data)
+                    dispatch({type: "ADD_LOCATION", payload: data})
+                    handleClose()
+                }
             }
         
         }else{
