@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
         e.preventDefault()
         setError(``)
         //dead simple validation
-        if(!!title && !!description && !!type && latitude && longitude){
+        if(!!title && !!description && !!type && selected){
             if(location){//edit mode
                 const data: LocationData = {id: location.id, title, type, description, latitude, longitude}
                 await axios.put(`http://localhost:3030/locations/${location.id}`, data)

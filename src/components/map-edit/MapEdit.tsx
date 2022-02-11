@@ -83,7 +83,7 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
             <Popup
             longitude={longitude}
             latitude={latitude}
-            offsetTop={-35}
+            offsetTop={-viewport.zoom*5}
             closeButton={true}
             closeOnClick={false}
             onClose={() => setShowPopup(false)}

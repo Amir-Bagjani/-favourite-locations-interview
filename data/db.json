@@ -1,20 +1,12 @@
 {
   "locations": [
     {
-      "id": 3,
-      "title": "Parsian Hotel",
-      "type": "Hotel",
-      "description": "LoreM good bed and nice crew, cheap bear",
-      "latitude": 34.33372931300354,
-      "longitude": 48.68171481476008
-    },
-    {
-      "id": 4,
-      "title": "Farshchian Hospital",
-      "type": "Hospital",
-      "description": "Loremzxcvcvxczvzxcvxcvxcvxczvzxcvxcvxczxcvzxcxczattacks, illness sadsad hfgh reyugvf gfk tye ",
-      "latitude": 32.7767,
-      "longitude": 96.797
+      "id": 1,
+      "title": "Navoshgaran",
+      "type": "Shop",
+      "description": "Tehran Province, Tehran, District 3, 2th floor no.267، Mirdamad Boulevard، Iran",
+      "latitude": 35.76249045667871,
+      "longitude": 51.423123438623996
     },
     {
       "id": 0.17332237420210284,
@@ -23,6 +15,14 @@
       "description": "fsdfsdf 65 65f sdaf65s6d5f 6sd5f 5sd6f 6sd5f6 asd5f5 asdf56sd\n sa\ndf\n asd\nfsd\naf\n\n",
       "latitude": 35.76914212147765,
       "longitude": 51.38278437060009
+    },
+    {
+      "id": 0.5582607527622208,
+      "title": "65",
+      "type": "Hospital",
+      "description": "62",
+      "latitude": 35.76249045667871,
+      "longitude": 51.423123438623996
     }
   ]
 }

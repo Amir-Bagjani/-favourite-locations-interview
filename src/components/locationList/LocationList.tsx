@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 //components
-import Modal from '../modal/Modal';
 import TableData from './TableData';
+import Loading from '../loading/Loading';
 //style
 import "./LocationList.css"
 //type
 import { LocationData } from '../../context/LocationContext';
 
-
+const  Modal = React.lazy(() => import('../modal/Modal'))
 
 const LocationList: React.FC = () => {
     const [showModal, setShowModal] = useState<boolean>(false)
@@ -32,8 +32,9 @@ const LocationList: React.FC = () => {
                         <TableData setShowModal={setShowModal} setLocation={setLocation} />
                     </tbody>
                 </table>
-
-                <Modal show={showModal} close={handleClose} location={location}/>
+                <Suspense fallback={<Loading />}>
+                    <Modal show={showModal} close={handleClose} location={location}/>
+                </Suspense>
             </div>
         </div>
     </>
