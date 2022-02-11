@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker } from "react-map-gl";
 
 import { LocationOn, Add, Remove, FullscreenExit } from "@material-ui/icons";
 
-import "./MapEdit.css"
+import "./MapAdd.css"
 
 interface MapProp {
     openMap: boolean
-    latitude: number
+    latitude: number 
     setLatitude: React.Dispatch<React.SetStateAction<number>>
-    longitude: number
+    longitude: number 
     setLongitude: React.Dispatch<React.SetStateAction<number>>
     offsetTop: number
     closeMap: () => void
-    title: string
-    description: string
+    setSelected: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude , setLongitude, offsetTop, closeMap, description, title }) => {
+const MapAdd: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude , setLongitude, offsetTop, closeMap, setSelected }) => {
     const div = useRef<HTMLDivElement>(null !)
-    const [zoom,setZoom] = useState(6)
+    const [zoom,setZoom] = useState(14)
     const [viewport, setViewport] = useState({
         latitude: latitude,
         longitude: longitude,
@@ -27,7 +26,6 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
     });
     const [leftMargin, setLeftMargin] = useState(0);
     const [topMargin, setTopMargin] = useState(0);
-    const [showPopup, setShowPopup] = useState(true);
 
     //get double click coordinate 
     const handleAddClick = (e: any): void => {
@@ -46,15 +44,18 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
 
     //set marker in center
     useEffect(() => {
-        if(latitude){
-            setViewport({...viewport, latitude, longitude})
-        }
+        setViewport({...viewport, latitude, longitude})
     }, [latitude])
 
     //zoom button
     useEffect(() => {
         setViewport({...viewport, zoom})
     }, [zoom])
+
+    //coordinate selected
+    useEffect(() => {
+        setSelected(true)
+    }, [])
 
 
   return (
@@ -74,27 +75,9 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
             offsetLeft={-viewport.zoom*3.5}
             offsetTop={-viewport.zoom*7}
         >
-            <LocationOn
-             style={{color: `royalblue`, fontSize: viewport.zoom * 7, cursor: `pointer`}}
-             onClick={() => setShowPopup(true)}
-             />
+            <LocationOn style={{color: `royalblue`, fontSize: viewport.zoom * 7, cursor: `pointer`}} />
         </Marker>}
-        {openMap && showPopup && (
-            <Popup
-            longitude={longitude}
-            latitude={latitude}
-            offsetTop={-35}
-            closeButton={true}
-            closeOnClick={false}
-            onClose={() => setShowPopup(false)}
-            anchor="bottom"
-            >
-                <div className="map-popup">
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                </div>
-            </Popup>
-        )}
+        
         {openMap && (
             <div  className="map-db-click">
                 <p>Click twice to change location</p>
@@ -118,4 +101,4 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
   )
 }
 
-export default MapEdit;
+export default MapAdd;

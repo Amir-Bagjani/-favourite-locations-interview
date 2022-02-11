@@ -3,6 +3,7 @@ import axios from "axios";
 import { Close } from "@material-ui/icons";
 //component
 import MapEdit from "../map-edit/MapEdit";
+import MapAdd from "../map-add/MapAdd";
 //style
 import "./Modal.css"
 //type and context
@@ -22,11 +23,12 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
     const [title,setTitle] = useState<string>(``)
     const [type,setType] = useState<string>(``)
     const [description,setDescription] = useState<string>(``)
-    const [latitude,setLatitude] = useState<number>(51.42333801534401 )
-    const [longitude,setLongitude] = useState<number>(35.7623859860821)
+    const [latitude,setLatitude] = useState<number>(35.76249045667871)
+    const [longitude,setLongitude] = useState<number>(51.423123438623996)
     const [error,setError] = useState<string>(``)
     const [openMap,setOpenMap] = useState<boolean>(false)
     const [offsetTop,setOffsetTop] = useState(0)
+    const [selected,setSelected] = useState<boolean>(false)
     const div = useRef<HTMLDivElement>(null !)   
      
 
@@ -39,6 +41,8 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
         setTitle(``)
         setDescription(``)
         setError(``)
+        //clear the selected coordinate for add mode
+        setSelected(false)
         close()
     }
 
@@ -140,7 +144,20 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
                         </div>}
 
                         {/* add mode */}
-                        {!location && <div className="modal-content-map center">gggg</div>}
+                        {!location && <div className={openMap ? "modal-content-map" : "modal-content-map center"}>
+                        {(openMap || selected) ? (
+                                <MapAdd
+                                openMap={openMap}
+                                closeMap={closeMap}
+                                latitude = {latitude}
+                                setLatitude = {setLatitude}
+                                longitude = {longitude}
+                                setLongitude = {setLongitude}
+                                offsetTop={offsetTop}
+                                setSelected={setSelected}
+                                />
+                            )  : `Choose a location`}
+                        </div>}
 
                         <button onClick={() => setOpenMap(true)} className="modal-open-map">open map</button>
                     
@@ -154,33 +171,3 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
 };
 
 export default Modal;
-
-
-
-
-// {location ?
-//     (<Map 
-//        openMap={openMap}
-//        closeMap={closeMap}
-//        latitude = {latitude}
-//        setLatitude = {setLatitude}
-//        longitude = {longitude}
-//        setLongitude = {setLongitude}
-//        offsetTop={offsetTop}
-//        title= {title}
-//        description ={description}
-//    />) : <div className="center">
-//        {openMap ? (
-//            <Map
-//            openMap={openMap}
-//            closeMap={closeMap}
-//            latitude = {latitude}
-//            setLatitude = {setLatitude}
-//            longitude = {longitude}
-//            setLongitude = {setLongitude}
-//            offsetTop={offsetTop}
-//            title= {title}
-//            description ={description}
-//            />
-//        )  : `Choose a location`}
-//        </div>} 
