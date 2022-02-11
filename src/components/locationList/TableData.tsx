@@ -10,8 +10,6 @@ interface TableDataProps {
   setLocation: React.Dispatch<React.SetStateAction<LocationData>>;
 }
 
-
-
 const TableData: React.FC<TableDataProps> = ({ setShowModal, setLocation }) => {
   const { state, dispatch } = useContext(LocationContext)
 

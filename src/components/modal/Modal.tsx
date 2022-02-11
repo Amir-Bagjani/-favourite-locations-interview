@@ -88,7 +88,6 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
     
 
   return (
-    <>
         <>
             {/* back drop modal */}
             {show && <div onClick={handleClose} className="modal-backdrop"></div>}   
@@ -166,7 +165,6 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
                 {error && <p className="error">{error}</p>}
             </div>
         </>
-    </>
   )
 };
 

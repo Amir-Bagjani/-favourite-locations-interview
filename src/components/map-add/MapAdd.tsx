@@ -29,14 +29,14 @@ const MapAdd: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude 
 
     //get double click coordinate 
     const handleAddClick = (e: any): void => {
-        if(openMap){//when map is open, edit
+        if(openMap){//when map is open, set coordinate
             const [longitude, latitude] = e.lngLat;
             setLatitude(latitude)
             setLongitude(longitude)
         }
     }
 
-    //get top and left distance
+    //get top and left distance 
     useEffect(() => {
         setTopMargin(div.current.offsetHeight)
         setLeftMargin(div.current.offsetLeft);
