@@ -56,6 +56,16 @@ const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude
         setViewport({...viewport, zoom})
     }, [zoom])
 
+    //escape button
+    useEffect(() => {
+        const escape = (e: KeyboardEvent): void => {
+            if(e.key === `Escape`) closeMap()
+        }
+
+        window.addEventListener(`keyup`, escape)
+        return () => window.removeEventListener(`keyup`, escape)
+    }, [])
+
 
   return (
     <div style={openMap ? {marginTop: `-${(offsetTop + topMargin) - 15}px`, marginLeft: `${(leftMargin / 3)}px`} : {}} className="map-container" ref={div}>
