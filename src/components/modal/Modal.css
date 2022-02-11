@@ -43,7 +43,7 @@
   border-radius: 0.3rem;
   border: 1px solid lightgray;
   width: 80%;
-  height: 20vh;
+  height: 20vh !important;
 }
 .modal-content-map span {
   color: gray;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Close } from "@material-ui/icons";
 //component
-import Map from "../map/Map";
+import MapEdit from "../map-edit/MapEdit";
 //style
 import "./Modal.css"
 //type and context
@@ -22,12 +22,13 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
     const [title,setTitle] = useState<string>(``)
     const [type,setType] = useState<string>(``)
     const [description,setDescription] = useState<string>(``)
-    const [latitude,setLatitude] = useState<number>()
-    const [longitude,setLongitude] = useState<number>()
+    const [latitude,setLatitude] = useState<number>(51.42333801534401 )
+    const [longitude,setLongitude] = useState<number>(35.7623859860821)
     const [error,setError] = useState<string>(``)
     const [openMap,setOpenMap] = useState<boolean>(false)
     const [offsetTop,setOffsetTop] = useState(0)
-    const div = useRef<HTMLDivElement>(null !)    
+    const div = useRef<HTMLDivElement>(null !)   
+     
 
     const titleChange = (e: React.ChangeEvent<HTMLInputElement>) : void => setTitle(e.target.value)
     const typeChange = (e: React.ChangeEvent<HTMLSelectElement>) : void => setType(e.target.value)
@@ -40,6 +41,7 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
         setError(``)
         close()
     }
+
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault()
         setError(``)
@@ -51,7 +53,10 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
                 dispatch({type: "EDIT_LOCATION", payload: data})
                 handleClose()
             }else{//add mode
-
+                const data: LocationData = {id: Math.random(), title, type, description, latitude, longitude}
+                await axios.post(`http://localhost:3030/locations`, data)
+                dispatch({type: "ADD_LOCATION", payload: data})
+                handleClose()
             }
         
         }else{
@@ -117,12 +122,11 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
                     </div>
 
                     <div className="modal-content-right">
+
                         <p>Map:</p>
-                        <div
-                            className="modal-content-map" 
-                        >
-                            {location ?
-                             (<Map 
+                        {/* edit mode */}
+                        {location && <div className="modal-content-map">
+                            <MapEdit
                                 openMap={openMap}
                                 closeMap={closeMap}
                                 latitude = {latitude}
@@ -132,14 +136,14 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
                                 offsetTop={offsetTop}
                                 title= {title}
                                 description ={description}
-                            />) : <div className="center">Choose a location</div>} 
-                        </div>
-                        <button
-                         onClick={location ? () => setOpenMap(true) : () => console.log(`sdfs`)}
-                         className="modal-open-map"
-                         >
-                            open map
-                        </button>
+                             />
+                        </div>}
+
+                        {/* add mode */}
+                        {!location && <div className="modal-content-map center">gggg</div>}
+
+                        <button onClick={() => setOpenMap(true)} className="modal-open-map">open map</button>
+                    
                     </div>
                 </div>
                 {error && <p className="error">{error}</p>}
@@ -151,3 +155,32 @@ const Modal: React.FC<ModalProps> = ({show, close, location}) => {
 
 export default Modal;
 
+
+
+
+// {location ?
+//     (<Map 
+//        openMap={openMap}
+//        closeMap={closeMap}
+//        latitude = {latitude}
+//        setLatitude = {setLatitude}
+//        longitude = {longitude}
+//        setLongitude = {setLongitude}
+//        offsetTop={offsetTop}
+//        title= {title}
+//        description ={description}
+//    />) : <div className="center">
+//        {openMap ? (
+//            <Map
+//            openMap={openMap}
+//            closeMap={closeMap}
+//            latitude = {latitude}
+//            setLatitude = {setLatitude}
+//            longitude = {longitude}
+//            setLongitude = {setLongitude}
+//            offsetTop={offsetTop}
+//            title= {title}
+//            description ={description}
+//            />
+//        )  : `Choose a location`}
+//        </div>} 

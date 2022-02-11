@@ -40,13 +40,12 @@
     padding: 1rem 0.5rem;
     border-radius: 0.2rem;
     margin-left: calc(50% - 100px);
-    
 }
 .map-popup{
     padding: 1rem;
     background-color: white;
     text-align: center;
-    word-break: break-all;
+    /* word-break: break-all; */
     word-wrap: break-word;
     width: 200px;
     border-radius: 1rem;

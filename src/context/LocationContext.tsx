@@ -73,15 +73,15 @@ export const LocationContextProvider: React.FC<LocationContextProviderProps> = (
     dispatch({ type: "IS_PENDING" });
     const fetchData = async () => {
       try {
-          const res = await axios.get(`http://localhost:3030/locations`, {cancelToken: axios.CancelToken.source().token});
-          dispatch({ type: "FIRST_TIME", payload: [...res.data] });
+        const res = await axios.get(`http://localhost:3030/locations`, {cancelToken: axios.CancelToken.source().token});
+        dispatch({ type: "FIRST_TIME", payload: [...res.data] });
       } catch (err) {
         if (axios.isCancel(err)) {
-            console.log(`fetch aborted`);
+          console.log(`fetch aborted`);
         } else {
-            dispatch({ type: "ERROR", payload: ERROR_MSG });
-            alert(ERROR_MSG);
-          }
+          dispatch({ type: "ERROR", payload: ERROR_MSG });
+          alert(ERROR_MSG);
+        }
       }
     };
 

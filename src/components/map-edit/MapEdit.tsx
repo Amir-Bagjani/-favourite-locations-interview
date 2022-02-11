@@ -3,21 +3,21 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 
 import { LocationOn, Add, Remove, FullscreenExit } from "@material-ui/icons";
 
-import "./Map.css"
+import "./MapEdit.css"
 
 interface MapProp {
     openMap: boolean
     latitude: number | undefined
-    setLatitude: React.Dispatch<React.SetStateAction<number | undefined>>
+    setLatitude: React.Dispatch<React.SetStateAction<number>>
     longitude: number | undefined
-    setLongitude: React.Dispatch<React.SetStateAction<number | undefined>>
+    setLongitude: React.Dispatch<React.SetStateAction<number>>
     offsetTop: number
     closeMap: () => void
     title: string
     description: string
 }
 
-const Map: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude , setLongitude, offsetTop, closeMap, description, title }) => {
+const MapEdit: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude , setLongitude, offsetTop, closeMap, description, title }) => {
     const div = useRef<HTMLDivElement>(null !)
     const [zoom,setZoom] = useState(6)
     const [viewport, setViewport] = useState({
@@ -118,4 +118,4 @@ const Map: React.FC<MapProp> = ({ openMap, latitude , setLatitude, longitude , s
   )
 }
 
-export default Map
+export default MapEdit;
